@@ -44,10 +44,9 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        .tableau-placeholder {
+        #tableauViz {
             width: 100%;
             height: 600px;
-            border: none;
         }
         footer {
             text-align: center;
@@ -83,7 +82,7 @@
             <li>הכנסות חודשיות</li>
             <li>דשבורד אינטראקטיבי מקיף</li>
         </ul>
-        <iframe class="tableau-placeholder" src="https://public.tableau.com/views/1_17529309386610/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" allowfullscreen allow="fullscreen"></iframe>
+        <div id="tableauViz"></div>
     </div>
     <div class="section" id="uses">
         <h2>שימושים עיקריים 🌟</h2>
@@ -99,6 +98,7 @@
         <p>© 2025 Console Query - כל הזכויות שמורות 📅</p>
     </footer>
 
+    <script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const navLinks = document.querySelectorAll('nav a');
@@ -108,6 +108,17 @@
                     document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
                 });
             });
+
+            const vizUrl = "https://public.tableau.com/views/1_17529309386610/Dashboard1";
+            const options = {
+                hideTabs: true,
+                width: "100%",
+                height: "600px",
+                onFirstInteractive: function () {
+                    console.log("Dashboard loaded!");
+                }
+            };
+            new tableau.Viz(document.getElementById("tableauViz"), vizUrl, options);
         });
     </script>
 </body>
